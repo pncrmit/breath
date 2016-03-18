@@ -6,322 +6,295 @@ include('../config.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/jquery-2.1.4.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
-    <script src="../lib/angular/angular.min.js"></script>
-    <script src="../js/gen_validatorv4.js"></script>
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  
+  <script src="../js/jquery-2.1.4.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../js/controllers.js"></script>
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["required"].value;
+            if (x.trim()==null || x.trim()==""|| x===" ") {
+                alert("First name must be filled out");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 
-<div id="header"></div>
+    <div id="header"></div>
 
-<div class="container">
+    <div class="container">
 
-    <div class="row">
-        <!--establish the form for customer, the form will perform validation, after that, search function -->
-        <form role="form" name="myForm" id="myForm" action="../php/create_customer.php" method="post">
+        <div class="row">
+            <!--establish the form for customer, the form will perform validation, after that, search function -->
+            <form role="form" name="myForm" action="../php/save_customer.php" onsubmit="return validateForm()" method="post">
 
-            <!--define the title of the form + the note for * symbol-->
-            <div class="col-lg-10 col-lg-push-1 col-md-10 col-md-push-1">
-                <h2 class="text-center">Customer</h2>
-                <div class="well well-sm col-md-4 text-center"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
-                <div class="clearfix"></div>
+                <!--define the title of the form + the note for * symbol-->
+                <div class="col-lg-10 col-lg-push-1 col-md-10 col-md-push-1">
+                    <h2 class="text-center">Customer</h2>
+                    <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
 
-                <!--draw a outside border + display form legend-->
-                <fieldset>
-                    <legend>Basic Information</legend>
+                    <!--draw a outside border + display form legend-->
+                    <fieldset>
+                        <legend>Basic Information</legend>
 
-                    <!--display the fields-->
-                    <!--display customer name-->
-                    <div class="form-group">
-                        <label>Customer Name</label>
-                        <!--display the error line of code-->
-                        <div id="myForm_customer_name_errorloc" class="error"></div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="customer_name" placeholder="Customer Name"  >
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Customer Long Name</label>
-                        <!--display the error line of code-->
-                        <div id="myForm_customer_long_name_errorloc" class="error"></div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="customer_long_name" placeholder="Customer Long Name" >
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-
-                    <!--display customer billing address-->
-                    <div class="form-group">
-                        <label>Customer Billing Address</label>
-
-                        <!--display customer billing address street + city + country-->
-                        <div class="row">
-
-                            <!--display customer billing address street-->
-                            <div class="form-group col-md-12">
-                                <label>Street</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_billing_address_street_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" style="min-width:100%" class="form-control" name="customer_billing_address_street" placeholder="Street" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-
-                            <!--display customer billing address city-->
-                            <div class="form-group col-md-7">
-                                <label>City</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_billing_address_city_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" style="min-width:90%" class="form-control" name="customer_billing_address_city" placeholder="City" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-
-                            <!--display customer billing address country-->
-                            <div class="form-group col-md-5">
-                                <label>Country</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_billing_address_country_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" style="min-width:100%" class="form-control" name="customer_billing_address_country" placeholder="Country" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--display customer tax code-->
-                    <div class="form-group">
-                        <label>Customer Tax Code</label>
-                        <!--display the error line of code-->
-                        <div id="myForm_customer_tax_code_errorloc" class="error"></div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="customer_tax_code" placeholder="Customer Tax Code" >
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-
-                    </div>
-
-                    <!--display customer accountable salesperson + responsible supervisor-->
-                    <div class="form-group">
-                        <label>Salesperson Accountable</label>
-                        <!--display the error line of code-->
-                        <div id="myForm_staff_id_errorloc" class="error"></div>
-                        <div class="input-group">
-                            <input type="hidden" class="form-control" name="staff_name" placeholder="Salesperson Accountable" >
-                            <input type="number" class="form-control" name="staff_id" placeholder="Staff ID">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>
-                    </div>
-
-                    <!--display customer status-->
-                    <!-- customer status is hidden because the default for newly created customer is active-->
-                    <div class="form-group hidden">
-                        <label>Customer Status</label>
-                        <div>
-                            <!--set up the status of customer -->
-                            <select id="customer_status_select" class="form-control" name="customer_status">
-                                <option name="customer_status_active" value="Active" selected="selected">Active</option>
-                                <option name="customer_status_suspended" value="Suspended">Suspended</option>
-                                <option name="customer_status_deleted" value="Deleted">Deleted</option>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <!--display other details as tab + sub-tabs-->
-                <!--tab headers-->
-                <div>
-                    <ul class="nav nav-tabs">
-                        <!--display the error line of code-->
-                        <li class="active"><a href="#contact" data-toggle="tab">Customer Contact Person</a></li>
-                        <li><a href="#shipping" data-toggle="tab">Shipping Address</a></li>
-                        <li><a href="#payment" data-toggle="tab">Payment</a></li>
-                    </ul>
-
-                    <!--sub-tab Contact person-->
-                    <div class="tab-content ">
-                        <div class="tab-pane active" id="contact">
-                            <!--<legend>Contact Person</legend>-->
-
-                            <!--contact person name-->
-                            <div class="form-group" style="margin-top: 15px !important;">
-                                <label>Contact Person Name</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_contact_person_name_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="customer_contact_person_name" placeholder="Contact person Name" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-
-                            <!--contact person phone number-->
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_contact_person_phone_number_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="customer_contact_person_phone_number" placeholder="Phone Number" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-
-                            <!--contact person email address-->
-                            <div class="form-group">
-                                <label>Email Address</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_contact_person_email_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="customer_contact_person_email" placeholder="Email Address" >
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--tab Customer shipping address-->
-                        <div class="tab-pane" id="shipping">
-                            <div class="form-group" style="margin-top: 15px !important;">
-
-                                <!--display customer shipping address street + city + country-->
-                                <div class="row">
-                                    <!--display customer shipping address street-->
-                                    <div class="form-group col-md-12">
-                                        <label>Street</label>
-                                        <!--display the error line of code-->
-                                        <div id="myForm_customer_shipping_address_street_errorloc" class="error"></div>
-                                        <div class="input-group">
-                                            <input type="text" style="min-width:100%" class="form-control" name="customer_shipping_address_street" placeholder="Street" >
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                        </div>
-                                    </div>
-
-                                    <!--display customer shipping address city-->
-                                    <div class="form-group col-md-7">
-                                        <label>City</label>
-                                        <!--display the error line of code-->
-                                        <div id="myForm_customer_shipping_address_city_errorloc" class="error"></div>
-                                        <div class="input-group">
-                                            <input type="text" style="min-width:90%" class="form-control" name="customer_shipping_address_city" placeholder="City" >
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                        </div>
-                                    </div>
-
-                                    <!--display customer shipping address country-->
-                                    <div class="form-group col-md-5">
-                                        <label>Country</label>
-                                        <!--display the error line of code-->
-                                        <div id="myForm_customer_shipping_address_country_errorloc" class="error"></div>
-                                        <div class="input-group">
-                                            <input type="text" style="min-width:100%" class="form-control" name="customer_shipping_address_country" placeholder="Country" >
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="clear"></div>
-
-                            </div>
-                        </div>
-
-                        <!--sub-tab payment term + details-->
-                        <div class="tab-pane" id="payment">
-                            <!--<legend>Payment</legend>-->
-
-                            <!--credit limit-->
-                            <div class="form-group" style="margin-top: 15px !important;">
-                                <label>Customer Credit Limit</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_credit_limit_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" name="customer_credit_limit" placeholder="Customer Credit Limit">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                </div>
-                            </div>
-
-                            <!--customer payment
-                            <div class="form-group">
-                            <label>Customer Payment</label>
+                        <!--hide the customer_id so user cannot edit it but the value will be passed on submitting the form-->
+                        <div class="form-group">
                             <div class="input-group">
-                            <input type="text" class="form-control" name="customer_payment" placeholder="Customer Payment" value="<?php echo $customer_payment; ?>" >
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                <input type="hidden" class="form-control" name="customer_id" value=" <?php echo $edit_customer_id; ?> " required>
                             </div>
-                            </div>-->
+                        </div>
 
-                            <!--customer payment term -->
-                            <div class="form-group">
-                                <label>Customer Payment Term</label>
-                                <!--display the error line of code-->
-                                <div id="myForm_customer_payment_term_errorloc" class="error"></div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="customer_payment_term" placeholder="Customer Payment Term" >
+                        <!--display the required fields-->
+                        <!--display customer name-->
+                        <div class="form-group">
+                            <label>Customer Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="required" name="customer_name" placeholder="Customer Name" required>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <!--display customer billing address-->
+                        <div class="form-group">
+                            <label>Customer Billing Address</label>
+
+                            <!--display customer billing address street + city + country-->
+                            <div class="row">
+
+                                <!--display customer billing address street-->
+                                <div class="form-group col-md-12">
+                                    <label>Street</label>
+                                    <div class="input-group">
+                                        <input type="text" style="min-width:100%" class="form-control" name="customer_billing_address_street" placeholder="Street" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--display customer billing address city-->
+                                <div class="form-group col-md-7">
+                                    <label>City</label>
+                                    <div class="input-group">
+                                        <input type="text" style="min-width:90%" class="form-control" name="customer_billing_address_city" placeholder="City" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--display customer billing address country-->
+                                <div class="form-group col-md-5">
+                                    <label>Country</label>
+                                    <div class="input-group">
+                                        <input type="text" style="min-width:100%" class="form-control" name="customer_billing_address_country" placeholder="Country" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--display customer tax code-->
+                        <div class="form-group">
+                            <label>Customer Tax Code</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="customer_tax_code" placeholder="Customer Tax Code" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <!--display customer accountable salesperson-->
+                        <div class="form-group">
+                            <label>Salesperson Accountable</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="staff_name" placeholder="Salesperson Accountable" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+
+                        <!--display customer description-->
+                            <div class="form-group">
+                                <label>Description</label>
+                                <div class="input-group">
+                                    <textarea name="customer_description" class="form-control" rows="2"></textarea>
+                                    <span class="input-group-addon"><span class="glyphicon"></span></span>
+                                </div>
+                            </div>
+                    </fieldset>
+
+                    <!--display other details as tab + sub-tabs-->
+                    <!--tab headers-->
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#contact" data-toggle="tab">Customer Contact Person</a></li>
+                            <li><a href="#shipping" data-toggle="tab">Shipping Address</a></li>
+                            <li><a href="#payment" data-toggle="tab">Payment</a></li>
+                        </ul>
+
+                        <!--sub-tab Contact person-->
+                        <div class="tab-content ">
+                            <div class="tab-pane active" id="contact">
+                                <!--<legend>Contact Person</legend>-->
+
+                                <!--contact person name-->
+                                <div class="form-group" style="margin-top: 15px !important;">
+                                    <label>Contact Person Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_contact_person_name" placeholder="Contact person Name" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--contact person phone number-->
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_contact_person_phone_number" placeholder="Phone Number" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--contact person email address-->
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_contact_person_email" placeholder="Email Address" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--tab Customer shipping address-->
+                            <div class="tab-pane" id="shipping">
+                                <div class="form-group" style="margin-top: 15px !important;">
+
+                                    <!--shipping address field(s)-->
+                                    <!--<legend>Shipping Address</legend>-->
+                                    <!--Dynamic Form Processing with PHP-->
+                                    <p>
+                                        <input type="button" value="Add New Address" onClick="addRow('dataTable')" />
+                                        <input type="button" value="Remove Checked Address(es)" onClick="deleteRow('dataTable')"  />
+                                        <p>(All acions apply only to entries with check marked check boxes only.)</p>
+                                    </p>
+                                    <table id="dataTable" class="form" >
+                                        <tr>
+                                            <p>
+                                                <td><input type="checkbox"  name="chk[]" style="margin-top: 30px !important;"/></td>
+                                                <td>
+                                                    <label>Street</label>
+                                                    <input type="text" style="width:100%"  name="customer_shipping_address_street[]" min="0">
+                                                </td>
+                                                <td>
+                                                    <label>City</label>
+                                                    <input type="text" style="width:90%" name="customer_shipping_address_city[]" min="0">
+                                                </td>
+                                                <td>
+                                                    <label>Country</label>
+                                                    <input type="text" style="width:90%" name="customer_shipping_address_country[]">
+                                                </td>
+                                            </p>
+                                        </tr>
+                                    </table>
+
+                                    <div class="clear"></div>
+
+                                </div>
+                            </div>
+
+                            <!--sub-tab payment term + details-->
+                            <div class="tab-pane" id="payment">
+                                <!--<legend>Payment</legend>-->
+
+                                <!--credit limit-->
+                                <div class="form-group" style="margin-top: 15px !important;">
+                                    <label>Customer Credit Limit</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="customer_credit_limit" placeholder="Customer Credit Limit" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--customer payment-->
+                                <div class="form-group">
+                                    <label>Customer Payment</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="customer_payment" placeholder="Customer Payment" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
+                                </div>
+
+                                <!--customer payment term -->
+                                <div class="form-group">
+                                    <label>Customer Payment Term</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="customer_payment_term" placeholder="Customer Payment Term" required>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!--submit button-->
+                    <input type="submit" name="submit" id="submit" value="Create" class="btn btn-default pull-right">
                 </div>
-
-                <!--submit button-->
-                <input type="submit" name="submit" id="submit" value="Create" class="btn btn-default pull-right">
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-<div id="footer"></div>
+    <div id="footer"></div>
 
-<!--script to validate inputs
-Reference: http://www.javascript-coder.com/html-form/javascript-form-validation.phtml/comment-page-6#comments-->
-<script language="JavaScript" type="text/javascript">
-//You should create the validator only after the definition of the HTML form
-var frmvalidator  = new Validator("myForm");
-frmvalidator.EnableOnPageErrorDisplay();
-frmvalidator.EnableMsgsTogether();
+    <script>
+        /**
+         * Project Name : Dynamic Form Processing with PHP
+         * URL: http://techstream.org/Web-Development/PHP/Dynamic-Form-Processing-with-PHP
+         *
+         * Licensed under the MIT license.
+         * http://www.opensource.org/licenses/mit-license.php
+         *
+         * Copyright 2013, Tech Stream
+         * http://techstream.org
+         */
 
-frmvalidator.addValidation("customer_name","req","Customer Name is required");
-frmvalidator.addValidation("customer_long_name","req","Customer Long Name is required");
+        function addRow(tableID) {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount < 5){							// limit the user from creating fields more than your limits
+                var row = table.insertRow(rowCount);
+                var colCount = table.rows[0].cells.length;
+                for(var i=0; i<colCount; i++) {
+                    var newcell = row.insertCell(i);
+                    newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                }
+            }else{
+                alert("The maximum number of shipping locations is 5.");
 
-frmvalidator.addValidation("customer_billing_address_street","req","Billing Address is required");
-frmvalidator.addValidation("customer_billing_address_city","req","Billing Address is required");
-frmvalidator.addValidation("customer_billing_address_country","req","Billing Address is required");
+            }
+        }
 
-frmvalidator.addValidation("customer_tax_code","req","Tax Code is required");
-frmvalidator.addValidation("customer_tax_code","num","Tax Code is numeric only");
-
-frmvalidator.addValidation("staff_id","req","Sale Person Accountable is required");
-
-frmvalidator.addValidation("customer_contact_person_name","req","Contact person name is required");
-
-frmvalidator.addValidation("customer_contact_person_phone_number","req","Contact person phone number is required");
-frmvalidator.addValidation("customer_contact_person_phone_number","phone","Contact person phone number is numeric only");
-
-frmvalidator.addValidation("customer_contact_person_email","req","Contact person email is required");
-frmvalidator.addValidation("customer_contact_person_email","email","Contact person email is required");
-
-frmvalidator.addValidation("customer_shipping_address_street","req","Shipping Address Street is required");
-frmvalidator.addValidation("customer_shipping_address_city","req","Shipping Address City is required");
-frmvalidator.addValidation("customer_shipping_address_country","req","Shipping Address Country is required");
-
-frmvalidator.addValidation("customer_credit_limit","req","Credit Limit is required");
-frmvalidator.addValidation("customer_credit_limit","num","Credit Limit is required");
-
-frmvalidator.addValidation("customer_payment_term","req","Payment Term is required");
-
-</script>
+        function deleteRow(tableID) {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) { 						// limit the user from removing all the fields
+                        alert("Cannot Remove all the shipping address.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
